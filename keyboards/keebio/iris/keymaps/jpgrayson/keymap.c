@@ -15,15 +15,27 @@ enum custom_keycodes {
 #define RSFT_ENT RSFT_T(KC_ENT)
 #define LCTL_ESC LCTL_T(KC_ESC)
 
+#define CAG_QUOT LCAG_T(KC_QUOT)
+#define HYP_QUOT HYPR_T(KC_QUOT)
+#define MEH_QUOT MEH_T(KC_QUOT)
+
+#define CAG_BSLS LCAG_T(KC_BSLS)
+#define HYP_BSLS HYPR_T(KC_BSLS)
+#define MEH_BSLS MEH_T(KC_BSLS)
+
+#define CAG_TAB  LCAG_T(KC_TAB)
+#define HYP_TAB  HYPR_T(KC_TAB)
+#define MEH_TAB  MEH_T(KC_TAB)
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BASE] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                     ┌────────┬────────┬────────┬────────┬────────┬────────┐
       KC_ESC ,  KC_1  ,  KC_2  ,  KC_3  ,  KC_4  ,  KC_5  ,                        KC_6  ,  KC_7  ,  KC_8  ,  KC_9  ,  KC_0  , KC_BSPC,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                     ├────────┼────────┼────────┼────────┼────────┼────────┤
-      KC_TAB ,  KC_Q  ,  KC_W  ,  KC_E  ,  KC_R  ,  KC_T  ,                        KC_Y  ,  KC_U  ,  KC_I  ,  KC_O  ,  KC_P  , KC_BSLS,
+      CAG_TAB,  KC_Q  ,  KC_W  ,  KC_E  ,  KC_R  ,  KC_T  ,                        KC_Y  ,  KC_U  ,  KC_I  ,  KC_O  ,  KC_P  ,CAG_BSLS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                     ├────────┼────────┼────────┼────────┼────────┼────────┤
-     LCTL_ESC,  KC_A  ,  KC_S  ,  KC_D  ,  KC_F  ,  KC_G  ,                        KC_H  ,  KC_J  ,  KC_K  ,  KC_L  , KC_SCLN, KC_QUOT,
+     LCTL_ESC,  KC_A  ,  KC_S  ,  KC_D  ,  KC_F  ,  KC_G  ,                        KC_H  ,  KC_J  ,  KC_K  ,  KC_L  , KC_SCLN,MEH_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐   ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT ,  KC_Z  ,  KC_X  ,  KC_C  ,  KC_V  ,  KC_B  , KC_MENU,     KC_DEL ,  KC_N  ,  KC_M  , KC_COMM, KC_DOT,  KC_SLSH,RSFT_ENT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘   └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘

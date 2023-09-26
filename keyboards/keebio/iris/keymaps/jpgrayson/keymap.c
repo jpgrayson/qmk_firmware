@@ -141,3 +141,14 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     }
     return true;
 }
+
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case MEH_QUOT:
+            // Do not select the hold action when another key is pressed.
+            return false;
+        default:
+            // Immediately select the hold action when another key is pressed.
+            return true;
+    }
+}

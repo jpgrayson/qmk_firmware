@@ -27,5 +27,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGBLIGHT_SAT_STEP 8
 #define RGBLIGHT_VAL_STEP 8
 
-#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
-#define RETRO_TAPPING_PER_KEY
+#define HOLD_ON_OTHER_KEY_PRESS
+#define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
+#define CAPS_WORD_IDLE_TIMEOUT 2500  // ms

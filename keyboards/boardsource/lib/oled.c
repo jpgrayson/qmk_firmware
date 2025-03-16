@@ -3,6 +3,7 @@
 #include "oled.h"
 
 void render_layer_state(void) {
+    #ifdef OLED_ENABLE
     switch (get_highest_layer(layer_state)) {
         case 0:
             oled_write_raw_P(layer0_img, sizeof(layer0_img));
@@ -17,4 +18,5 @@ void render_layer_state(void) {
             oled_write_raw_P(layer3_img, sizeof(layer3_img));
             break;
     }
+    #endif
 }

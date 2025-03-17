@@ -8,10 +8,12 @@
 #define LOWER TL_LOWR
 #define RSFT_ENT RSFT_T(KC_ENT)
 #define LCTL_ESC LCTL_T(KC_ESC)
-#define KC_CAG LCAG(KC_NO)
-#define KC_LAG LAG(KC_NO)
+#define KC_CAG (QK_LCTL | QK_LALT | QK_LGUI | KC_NO)
+#define KC_AG  (QK_LALT | QK_LGUI | KC_NO)
+#define KC_CG  (QK_LCTL | QK_LGUI | KC_NO)
+#define DMND   MO(_DIAMOND)
 
-enum layers {_BASE = 0, _LOWER, _RAISE, _ADJUST};
+enum layers {_BASE = 0, _LOWER, _RAISE, _ADJUST, _DIAMOND};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -21,18 +23,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // | TAB  |   Q  |   W  |   E  |   R  |   T  |                                |   Y  |   U  |   I  |   O  |   P  |  \   |
   // |------+------+------+------+------+------|                                |------+------+------+------+------+------|
   // | CTRL |   A  |   S  |   D  |   F  |   G  |-------.                ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
-  // |------+------+------+------+------+------| MENU  |                |  DEL  |------+------+------+------+------+------|
+  // |------+------+------+------+------+------| DMND  |                |  DEL  |------+------+------+------+------+------|
   // | LSFT |   Z  |   X  |   C  |   V  |   B  |-------|                |-------|   N  |   M  |   ,  |   .  |   /  | ENT  |
   // `-----------------------------------------/       /                \       \-----------------------------------------'
-  //                   | LALT | LGUI |LOWER | /  CAG  /                  \  SPC  \  |RAISE |  LAG | RALT |
+  //                   | LALT | LGUI |LOWER | /  CAG  /                  \  SPC  \  |RAISE |  AG  | RALT |
   //                   |      |      |      |/       /                    \       \ |      |      |      |
   //                   `----------------------------'                      '-------''--------------------'
   [_BASE] = LAYOUT(
   KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                       KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
   LCTL_ESC,KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                       KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-  KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_MENU,    KC_DEL, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_ENT,
-                          KC_LALT,    KC_LGUI, LOWER,   KC_CAG,    KC_SPC, RAISE,   KC_LAG,  KC_RALT
+  KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,  DMND,        KC_DEL, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_ENT,
+                          KC_LALT,    KC_LGUI, LOWER, KC_CAG,      KC_SPC, RAISE,   KC_AG,   KC_RALT
   ),
 
   // ,-----------------------------------------.                                ,-----------------------------------------.
@@ -76,22 +78,42 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   // ,-----------------------------------------.                                ,-----------------------------------------.
-  // |REBOOT| F11  | F12  | F13  | F14  | F15  |                                | F16  | F17  | F18  | F19  | F20  | BOOT |
+  // |      | F11  | F12  | F13  | F14  | F15  |                                | F16  | F17  | F18  | F19  | F20  |      |
   // |------+------+------+------+------+------|                                |------+------+------+------+------+------|
-  // |      |      |      |      |      |      |                                |BLstep|      |RGBmod|RGBhue|      |      |
+  // |      |      |      |      |      |      |                                |      |      |      |      |      |      |
   // |------+------+------+------+------+------|                                |------+------+------+------+------+------|
-  // |      |      |      |      |      |      |-------.                ,-------|BLtog |      |RGBtog|RGBsat|      |      |
+  // |      |      |      |      |      |      |-------.                ,-------|      |      |      |      |      |      |
   // |------+------+------+------+------+------|       |                |       |------+------+------+------+------+------|
-  // |      |      |      |      |      |      |-------|                |-------|BLbrtg|      |      |RGBval|      |      |
+  // |      |      |      |      |      |      |-------|                |-------|      |      |      |      |      |      |
   // `-----------------------------------------/       /                \       \-----------------------------------------'
   //                   |      |      |      | /       /                  \       \  |      |      |      |
   //                   |      |      |      |/       /                    \       \ |      |      |      |
   //                   `----------------------------'                      '-------''--------------------'
   [_ADJUST] = LAYOUT(
-  QK_RBT,  KC_F11,  KC_F12,  KC_F13,  KC_F14,  KC_F15,                     KC_F16,  KC_F17,  KC_F18,  KC_F19,  KC_F20,  QK_BOOT,
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                    BL_STEP, XXXXXXX, RGB_MOD, RGB_HUI, XXXXXXX, XXXXXXX,
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                    BL_TOGG, XXXXXXX, RGB_TOG, RGB_SAI, XXXXXXX, XXXXXXX,
-  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, BL_BRTG, XXXXXXX, XXXXXXX, RGB_VAI, XXXXXXX, _______,
+  XXXXXXX, KC_F11,  KC_F12,  KC_F13,  KC_F14,  KC_F15,                     KC_F16,  KC_F17,  KC_F18,  KC_F19,  KC_F20,  XXXXXXX,
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+                             _______, _______, _______, _______,  _______, _______, _______, _______
+  ),
+
+  // ,-----------------------------------------.                                ,-----------------------------------------.
+  // |REBOOT|      |      |      |      |      |                                |      |      |      |      |      | BOOT |
+  // |------+------+------+------+------+------|                                |------+------+------+------+------+------|
+  // |      |      |      |SPD Up|HUE Up|UGNext|                                |      |      |      |      |      |      |
+  // |------+------+------+------+------+------|                                |------+------+------+------+------+------|
+  // |      |      |      |SPD Dn|HUE Dn|UGPrev|-------.                ,-------|      |      |UGTogl|      |      |      |
+  // |------+------+------+------+------+------|       |                |       |------+------+------+------+------+------|
+  // |      |      |      |      |      |      |-------|                |-------|      |      |      |      |      |      |
+  // `-----------------------------------------/       /                \       \-----------------------------------------'
+  //                   |      |      |      | /       /                  \       \  |      |      |      |
+  //                   |      |      |      |/       /                    \       \ |      |      |      |
+  //                   `----------------------------'                      '-------''--------------------'
+  [_DIAMOND] = LAYOUT(
+  QK_RBT,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,
+  XXXXXXX, XXXXXXX, XXXXXXX, UG_SPDU, UG_HUEU, UG_NEXT,                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  XXXXXXX, XXXXXXX, XXXXXXX, UG_SPDD, UG_HUED, UG_PREV,                    XXXXXXX, XXXXXXX, UG_TOGG, XXXXXXX, XXXXXXX, XXXXXXX,
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
                              _______, _______, _______, _______,  _______, _______, _______, _______
   )
 };
